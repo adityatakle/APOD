@@ -88,7 +88,6 @@ function normal(main_para = '') {
         else {
             copyright.style.display = 'none';
         }
-        console.log(result);
         if (result.media_type === "image") {
             url_btn.style.display = 'block';
             
