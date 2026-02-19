@@ -1,0 +1,27 @@
+h1 {
+    text-align: center;
+    font-size: 40px;
+}
+
+#head {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px 0px 20px 0px;
+}
+
+#date {
+    margin: 0px 100px 0px 0px;
+    font-size: 25px;
+}
+
+#random{
+    margin: 0px 0px 0px 100px;
+    font-size: 25px;
+    text-decoration: none;
+    border: 0px black solid;
+    border-radius: 7px;
+    color: #fffde1;
+    background-color:  #22559c;
+    padding: 1px 5px;
+}
