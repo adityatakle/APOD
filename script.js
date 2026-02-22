@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const info = document.querySelector('#info');
     info.innerHTML = `<span id='title'></span><br>
-        <span id='media'></span><br>
+        <div id='media_div'><button id='prev_btn'> < </button><span id='media_pic'></span><button id = 'next_btn'> > </button></div><br>
         <div id='btn'> <button id='url_btn'> </button> <button id='web_btn'> </button> </div><br>
         <span id='message'></span><br>
         <span id='copyright'></span><br>
@@ -22,6 +22,36 @@ document.addEventListener("DOMContentLoaded", function() {
         normal('&count=1')
     })
 
+    document.querySelector('#next_btn').addEventListener('click', () => {
+        let nowDate = new Date(document.querySelector('#date').value);
+        nowDate.setDate(nowDate.getDate() + 1);
+        nowDate = nowDate.toISOString().split('T')[0];
+        
+        if (nowDate <= dateInput.max) {
+            dateInput.value = nowDate;
+            normal(`&date=${nowDate}`);
+        }
+        else {
+            alert(`Check out tomorrow...`);
+        }
+        
+    })
+
+    document.querySelector('#prev_btn').addEventListener('click', () => {
+        let nowDate = new Date(document.querySelector('#date').value);
+        nowDate.setDate(nowDate.getDate() - 1);
+        nowDate = nowDate.toISOString().split('T')[0];
+        
+        if (nowDate >= dateInput.min){
+            dateInput.value = nowDate;
+            normal(`&date=${nowDate}`);
+        }
+        else{
+            alert('Data dont exist...');
+        }
+        
+    })
+
     normal();
           
     
@@ -29,7 +59,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function normal(main_para = '') {
     let title = info.querySelector('#title');
-    let media = info.querySelector('#media');
+    let media = info.querySelector('#media_div');
+    let media_pic = info.querySelector('#media_pic');
+    let prev_btn = info.querySelector('#prev_btn');
+    let next_btn = info.querySelector('#next_btn');
     let message = info.querySelector('#message');
     let exp = info.querySelector('#explanation');
     let btn = info.querySelector('#btn');
@@ -37,7 +70,20 @@ function normal(main_para = '') {
     let web_btn = info.querySelector('#web_btn');
     let copyright = info.querySelector('#copyright');
     title.style.display = 'block';
-    media.style.display = 'block';
+    media.style.display = 'flex';
+    media.style.flexDirection = 'row';
+    media.style.justifyContent = 'center';
+    media.style.alignItems = 'center';
+    media.style.width = '100%';
+    media.style.gap = '5%';
+    prev_btn.style.border = 'none';
+    prev_btn.style.backgroundColor = 'inherit';
+    prev_btn.style.borderRadius = '50%';
+    prev_btn.style.fontSize = '100px';
+    next_btn.style.border = 'none';
+    next_btn.style.backgroundColor = 'inherit';
+    next_btn.style.borderRadius = '50%';
+    next_btn.style.fontSize = '100px';
     message.style.display = 'block';
     exp.style.display = 'block';
     copyright.style.display = 'block';
@@ -63,10 +109,23 @@ function normal(main_para = '') {
     web_btn.style.border = '1px black solid';
     web_btn.style.borderRadius = '10px';
     web_btn.style.padding = '8px';
-    media.style.textAlign = 'center';
-    
+
     title.style.textAlign = 'center';
     title.style.fontSize = '50px';
+
+    prev_btn.addEventListener('mouseenter', () => {
+        prev_btn.style.backgroundColor = 'grey';
+    })
+    prev_btn.addEventListener('mouseleave', () => {
+        prev_btn.style.backgroundColor = 'inherit';
+    })
+
+    next_btn.addEventListener('mouseenter', () => {
+        next_btn.style.backgroundColor = 'grey';
+    })
+    next_btn.addEventListener('mouseleave', () => {
+        next_btn.style.backgroundColor = 'inherit';
+    })
 
     fetch(`https://api.nasa.gov/planetary/apod?api_key=LjfoUj2eYZ8zDxmo2hIAuuMkhmhJ7qPfFIa2xqk8${main_para}`)
     .then(response => response.json())
@@ -77,7 +136,7 @@ function normal(main_para = '') {
         }
         let date_ui = document.querySelector('#date').value
         let apod_link = `https://apod.nasa.gov/apod/ap${date_ui.substring(2,4)}${date_ui.substring(5,7)}${date_ui.substring(8,10)}.html`
-        web_btn.innerHTML = `<a href='${apod_link}' target=_blank style="text-decoration: none; color: white;">APOD WEBSITE LINK</a>`
+        web_btn.innerHTML = `<a href='${apod_link}' target=_blank style="text-decoration: none; color: white;">APOD WEBSITE</a>`
         
         title.innerHTML = result.title;
         exp.innerHTML = result.explanation;
@@ -93,15 +152,14 @@ function normal(main_para = '') {
             
             
             url_btn.innerHTML = `<a href='${result.hdurl}' target=_blank style="text-decoration: none; color: white;">HD MEDIA</a>`
-            media.innerHTML = `<img id='image' src='${result.url}'>`;
+            media_pic.innerHTML = `<img id='image' src='${result.url}' style="max-width: 75vw; height: auto; ">`;
             
         }
         if (result.media_type === "video") {
-            media.innerHTML = `<iframe src="${result.url}" width="640" height="360" allowfullscreen> </iframe>`;
-            message.innerHTML = `If the above media is not visible click <a href='${result.url}' target=_blank>here</a> to get redirected.`
+            media_pic.innerHTML = `<iframe src="${result.url}" width="640" height="360" allowfullscreen> </iframe>`;
         }
         if (result.media_type === "other") {
-            media.innerHTML = `Other mmedia  type. <br> Click <a href='${apod}'>here</a> to visit official APOD website`
+            media_pic.innerHTML = `Other mmedia  type. <br> Click <a href='${apod}'>here</a> to visit official APOD website`
         }
     });
 }
