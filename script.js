@@ -1,4 +1,174 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const viz1 = document.getElementById('viz1');
+    const viz2 = document.getElementById('viz2');
+    const viz3 = document.getElementById('viz3');
+    if (viz1 ){
+        new Chart(viz1, {
+        type: 'pie',
+        data: {
+            labels: ['Youtube', 'Vimeo', 'Others'],
+            datasets: [{
+                label: 'Platform Count',
+                data: [317, 46, 16],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Sources of videos'
+                }
+            }
+        }
+    });
+
+    new Chart(viz2, {
+        type: 'pie',
+        data: {
+            labels: ['Image', 'Video', 'Others'],
+            datasets: [{
+                label: 'Platform Count',
+                data: [6499, 379, 10],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Media percent'
+                }
+            }
+        }
+    });
+
+    new Chart(viz3, {
+        type: 'pie',
+        data: {
+            labels: ['Video', 'Image'],
+            datasets: [{
+                label: 'Count',
+                data: [41, 22],
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)'
+                ],
+                hoverOffset: 4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Entries More than once'
+                }
+            }
+        }
+    });
+
+        new Chart(viz4, {
+        type: 'line',
+        data: {
+            labels: [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 23, 26, 27, 29, 37, 40, 50, 53, 54],
+            datasets: [{
+                label: 'Frequency of Copyright Counts',
+                data: [ 20, 22, 16, 8, 5, 6, 4, 2, 4, 3, 3, 3, 4, 1, 2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1],
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                fill: true,
+                tension: 0.1, 
+                pointRadius: 2.5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: { display: true, text: 'Copyright Count' },
+                    ticks: { maxTicksLimit: 30 }
+                },
+                y: {
+                    title: { display: true, text: 'Number of Occurrences' }
+                }
+            }
+        }
+    });
+
+        new Chart(viz5, {
+        type: 'bar',
+        data: {
+            labels: [2, 3, 4, 5], // Only use the labels you have data for
+            datasets: [{
+                label: 'Video Occurrences',
+                data: [29, 10, 2, 0],
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { title: { display: true, text: 'Number of Times Entry Appeared' } },
+                y: { title: { display: true, text: 'Count of Unique Videos' }, beginAtZero: true }
+            }
+        }
+    });
+    new Chart(viz6, {
+        type: 'bar',
+        data: {
+            labels: [2, 3],
+            datasets: [{
+                label: 'Image Occurrences',
+                data: [22, 0],
+                borderColor: '#fd0d0d', 
+                backgroundColor: 'rgba(253, 13, 13, 0.1)', 
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: { title: { display: true, text: 'Number of Times Entry Appeared' } },
+                y: { title: { display: true, text: 'Count of Unique Images' }, beginAtZero: true }
+            }
+        }
+    });
+
+
+    }
+    
+
+
     const info = document.querySelector('#info');
     info.innerHTML = `<span id='title'></span><br>
         <div id='media_div'><button id='prev_btn'> < </button><span id='media_pic'></span><button id = 'next_btn'> > </button></div><br>

@@ -1,6 +1,31 @@
-h1 {
+#headline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#headline > p{
     text-align: center;
+    flex-grow: 1;
+    font-weight: bold;
     font-size: 40px;
+}
+
+#da_btn{
+    padding: 7px;
+    margin:0 20px 0 0;
+    background-color: inherit;
+    border: 2.5px black solid;
+    border-radius: 12px;
+    align-items: end;
+    background-color: cadetblue;
+}
+
+#da_a {
+    text-decoration: none;
+    color: yellow;
+    font-size: 25px;
 }
 
 #head {
@@ -24,4 +49,33 @@ h1 {
     color: #fffde1;
     background-color:  #22559c;
     padding: 1px 5px;
+}
+
+.vizes {
+    height:450px;
+    width: 600px;
+    padding: 50px 0;
+}
+
+.viz_des {
+    padding:0 50px;
+    font-size: 22px;
+}
+
+#head_viz > p{
+    font-size: 32px;
+    text-align: center;
+}
+
+#top_cr {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+#top_cr > p{
+    text-align: center;
+    padding: 0;
+    margin: 10px;
+    font-size: 35px;
 }

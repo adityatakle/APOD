@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href=style.css rel="stylesheet">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="head_viz">
+        <p> Data visualization of APOD data from <strong> 2007-01-01 </strong> to <strong> 2025-12-23.</strong> <a href="https://github.com/rfordatascience/tidytuesday/tree/main/data/2026/2026-01-20">Dataset Source</a> </p>
+    </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <td class="vizes"><canvas id="viz1"></canvas></td>
+                <td class="viz_des">This pie chart illustrates the distribution of video hosting providers for APOD entries. Youtube, primary platform with 317 videos (83.6%), Vimeo with 46 videos (12.1%) and Other platforms accounting for 16 videos (4.2%).</td>
+            </tr>
+            <tr>
+                <td class="vizes" ><canvas id="viz2"></canvas></td>
+                <td class="viz_des">This pie chart illustrates the distribution of type of media for APOD entries. Images, with the major share accounts for 6499 entries (94.35%), Videos with 379 entries (5.50%) and other types of media accounting for 10 entries (0.15%).</td>
+            </tr>
+            <tr>
+                <td class="vizes" ><canvas id="viz3"></canvas></td>
+                <td class="viz_des">This pie chart illustrates the distribution of media types for <strong>unique</strong> APOD entries that appeared more than once. Videos account for the majority share at 41 (65.08%), while Images account for 22 (34.92%).</td>
+            </tr>
+            <tr>
+                <td class="vizes"><canvas  id="viz4"></canvas></td>
+                <td class="viz_des" >This line chart illustrates occurances of copyright counts with more than 4 frequencies.</td>
+            </tr>
+            <tr>
+                <td class="vizes">
+                    <div id="top_cr">
+                        <p>Martin Pugh - 54</p>
+                        <p>Adam Block - 53</p>
+                        <p>Babak Tafreshi - 50</p>
+                        <p>Robert Gendler - 40</p>
+                        <p>Yuri Beletsky - 40</p>
+                    </div>
+                </td>
+                <td class="viz_des"> Top 5 person's whose works has been featured in APOD along with times.</td>
+            </tr>
+            <tr>
+                <td class="vizes"><canvas  id="viz5"></canvas></td>
+                <td class="viz_des" >This bar chart illustrates the frequency of unique video entries that appeared more than once. The majority of recurring videos (29) appeared twice, while only 2 videos appeared four times.</td>
+            </tr>
+            <tr>
+                <td class="vizes"><canvas  id="viz6"></canvas></td>
+                <td class="viz_des" >This bar chart displays the frequency of unique image entries with multiple appearances. In this dataset, all 22 recurring images appeared exactly twice.</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</body>
