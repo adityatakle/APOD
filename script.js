@@ -296,14 +296,32 @@ function normal(main_para = '') {
     next_btn.addEventListener('mouseleave', () => {
         next_btn.style.backgroundColor = 'inherit';
     })
-
-    fetch(`https://api.nasa.gov/planetary/apod?api_key=LjfoUj2eYZ8zDxmo2hIAuuMkhmhJ7qPfFIa2xqk8${main_para}`)
+    let query = main_para;
+    if (main_para.startsWith('&date=')) {
+        const d = main_para.slice(6);
+        query = `&start_date=${d}&end_date=${d}`;
+    }
+    fetch(`https://science.nasa.gov/wp-json/wp/v2/apod-basic?api_key=LjfoUj2eYZ8zDxmo2hIAuuMkhmhJ7qPfFIa2xqk8${main_para}`)
     .then(response => response.json())
     .then(result => {
-        if (main_para === '&count=1'){
-            result =  result[0] 
-            document.querySelector('#date').value = result.date
+        if (Array.isArray(result)) {
+            const wanted = main_para.startsWith('&date=') ? main_para.slice(6) : null;
+            result = (wanted && result.find(r => r.date === wanted)) || result[0];
         }
+
+        if (!result || !result.title) {
+            title.innerHTML = 'No APOD found for this date';
+            exp.innerHTML = '';
+            media_pic.innerHTML = '';
+            copyright.style.display = 'none';
+            url_btn.style.display = 'none';
+            return;
+        }
+
+        if (main_para === '&count=1') {
+            document.querySelector('#date').value = result.date;
+        }
+
         let date_ui = document.querySelector('#date').value
         let apod_link = `https://apod.nasa.gov/apod/ap${date_ui.substring(2,4)}${date_ui.substring(5,7)}${date_ui.substring(8,10)}.html`
         web_btn.innerHTML = `<a href='${apod_link}' target=_blank style="text-decoration: none; color: white;">APOD WEBSITE</a>`
@@ -318,12 +336,10 @@ function normal(main_para = '') {
             copyright.style.display = 'none';
         }
         if (result.media_type === "image") {
+            const imgSrc = result.hdurl || result.url;
             url_btn.style.display = 'block';
-            
-            
-            url_btn.innerHTML = `<a href='${result.hdurl}' target=_blank style="text-decoration: none; color: white;">HD MEDIA</a>`
-            media_pic.innerHTML = `<img id='image' src='${result.url}' style="max-width: 75vw; height: auto; ">`;
-            
+            url_btn.innerHTML = `<a href='${imgSrc}' target=_blank style="text-decoration: none; color: white;">HD MEDIA</a>`
+            media_pic.innerHTML = `<img id='image' src='${imgSrc}' alt='${result.alt || result.title}' style="max-width: 75vw; height: auto; ">`;
         }
         if (result.media_type === "video") {
             media_pic.innerHTML = `<iframe src="${result.url}" width="640" height="360" allowfullscreen> </iframe>`;
